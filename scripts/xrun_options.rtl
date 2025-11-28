@@ -1,0 +1,15 @@
+######################################
+#
+#         XRUN FLAGS & FILES
+#
+######################################
+
+-sv
+-debug
+#-gui
+-log ../workspace/xrun.log
+-timescale 1ns/1ps
+
+-f ../src/dut_src_list.txt
+# Remember to change the "-input <path_file>.svcf" to "-input ../scripts/<path_file>.svcf" - Delete this line when done
+#-input ../scripts/<insert_file>.tcl
