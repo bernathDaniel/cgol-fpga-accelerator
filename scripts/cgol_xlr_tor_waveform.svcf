@@ -1,0 +1,327 @@
+# SimVision Command Script (Fri Jul 18 05:45:13 PM UTC 2025)
+#
+# Version 23.09.s013
+#
+# You can restore this configuration with:
+#
+#     simvision -input /project/tsmc65/users/bernatd/ws/DDP25/DDP-Projects/CGOL/scripts/cgol_xlr_tor_waveform.svcf
+#  or simvision -input /project/tsmc65/users/bernatd/ws/DDP25/DDP-Projects/CGOL/scripts/cgol_xlr_tor_waveform.svcf database1 database2 ...
+#
+
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-txe_waveform_toggle-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set plugin-enable-groupscope 0
+preferences set sb-display-values 1
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Windows-WaveWindow {
+  usual
+  position -pos 2
+}
+preferences set toolbar-WaveZoom-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+
+#
+# Databases
+#
+array set dbNames ""
+set dbNames(realName1) [ database require waves -hints {
+	file ./waves.shm/waves.trn
+	file /project/tsmc65/users/bernatd/ws/DDP25/DDP-Projects/CGOL/sim/waves.shm/waves.trn
+}]
+if {$dbNames(realName1) == ""} {
+    set dbNames(realName1) waves
+}
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1906x837+0+25}] != ""} {
+    window geometry "Waveform 1" 1906x837+0+25
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar select designbrowser
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 174 \
+    -units ns \
+    -valuewidth 244
+waveform baseline set -time 146,836,043.46ns
+
+set id [waveform add -cdivider divider]
+set id [waveform add -label {Test Parameters} -comment {}]
+waveform format $id -namecolor #ff0000
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.grid_width[31:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.grid_height[6:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.bytes_per_grid_row[31:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_read_pic_fcc.mem_size_bytes[5:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor._num_itr_[31:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff9900 -namecolor #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -label {Counters & Flags} -comment {}]
+waveform format $id -namecolor #ff0000 -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.dbl_load_idx}]}
+	} ]]
+waveform format $id -color #9900ff -namecolor #9900ff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.grid_rd_row_idx[6:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.grid_wr_row_idx[6:0]}]}
+	} ]]
+waveform format $id -radix %b -color #0000ff -namecolor #0000ff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.next_is_last_rd}]}
+	} ]]
+waveform format $id -color #00ffff -namecolor #00ffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.next_is_last_row}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.is_last_row}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.num_itr_counter[31:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff0000 -namecolor #ff0000
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.is_last_itr}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -label Addresses -comment {}]
+waveform format $id -namecolor #ff0000 -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.grid_xmem_base_addr[15:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.crnt_rd_addr[15:0]}]}
+	} ]]
+waveform format $id -radix %b
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.crnt_wr_addr[15:0]}]}
+	} ]]
+waveform format $id -radix %d -color #0000ff -namecolor #0000ff
+set id [waveform add -cdivider divider]
+set id [waveform add -label {FSM & CLK} -comment {}]
+waveform format $id -namecolor #ff0000 -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.rst_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.next_state[6:0]}]}
+	} ]]
+waveform format $id -color #ffff00 -namecolor #ffff00
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.state[6:0]}]}
+	} ]]
+waveform format $id -color #ff0000 -namecolor #ff0000
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.start}]}
+	} ]]
+waveform format $id -namecolor #ffffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.done}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.clear_done_on_read}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -label READ -comment {}]
+waveform format $id -namecolor #00ffff -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_read_pic_fcc.mem_req}]}
+	} ]]
+waveform format $id -color #00ffff -namecolor #00ffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_read_pic_fcc.mem_start_addr[15:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_read_pic_fcc.mem_valid}]}
+	} ]]
+waveform format $id -color #00ffff -namecolor #00ffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_read_pic_fcc.mem_data[31:0]}]}
+	} ]]
+waveform format $id -radix %x -color #00ffff -namecolor #00ffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.triple_row_buf[0]}]}
+	} ]]
+waveform format $id -radix %d -color #00ffff -namecolor #00ffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.triple_row_buf[1]}]}
+	} ]]
+waveform format $id -radix %d -color #00ffff -namecolor #00ffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.triple_row_buf[2]}]}
+	} ]]
+waveform format $id -radix %d -color #00ffff -namecolor #00ffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.double_row_hold_buf[0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff0099 -namecolor #ff0099
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.double_row_hold_buf[1]}]}
+	} ]]
+waveform format $id -radix %d -color #ff0099 -namecolor #ff0099
+set id [waveform add -cdivider divider]
+set id [waveform add -label WRITE -comment {}]
+waveform format $id -namecolor #ff0000
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_write_fcc.mem_req}]}
+	} ]]
+waveform format $id -color #ff0000 -namecolor #ff0000
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_write_fcc.mem_start_addr[15:0]}]}
+	} ]]
+waveform format $id -radix %d -color #0000ff -namecolor #0000ff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.updated_row[63:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff0000 -namecolor #ff0000
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_write_fcc.mem_data[31:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff0000 -namecolor #ff0000
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.mem_intf_write_fcc.mem_ack}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -label {ZERO TRACKING} -comment {}]
+waveform format $id -namecolor #ff693e
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.is_zero_row_rd[63:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff693e -namecolor #ff693e
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.row_is_zero_wr[63:0]}]}
+	} ]]
+waveform format $id -radix %b -color #ff693e -namecolor #ff693e
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.row_is_zero_wr_ps}]}
+	} ]]
+waveform format $id -color #ff693e -namecolor #ff693e
+set id [waveform add -cdivider divider]
+set id [waveform add -label {WINDOW DEBUG} -comment {}]
+waveform format $id -namecolor #0099ff
+set id [waveform add -cdivider divider]
+set id [waveform add -label POINTERS -comment {}]
+waveform format $id -namecolor #ff9900
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.triple_buf_next_row_idx[1:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff9900 -namecolor #ff9900
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.triple_buf_crnt_row_idx[1:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff9900 -namecolor #ff9900
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.triple_buf_prev_row_idx[1:0]}]}
+	} ]]
+waveform format $id -radix %d -color #ff9900 -namecolor #ff9900
+set id [waveform add -cdivider divider]
+set id [waveform add -label {CGOL LOGIC} -comment {}]
+waveform format $id -namecolor #9900ff -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.sum_col[0:63]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.unmblk2.unmblk1.sum_neighs[3:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.updated_row_ps[63:0]}]}
+	} ]]
+waveform format $id -radix %d
+set id [waveform add -cdivider divider]
+set id [waveform add -cdivider divider]
+set id [waveform add -label {GPP Control} -comment {}]
+waveform format $id -namecolor #ff0000
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.regs_idx}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.host_regs[7:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.host_regs_valid_pulse[7:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.host_regs_data_out_ps[7:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.host_regs_data_out[7:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.host_regs_valid_out[7:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {k5_tb.k5_xbox_sys.xbox.xbox_xlr_wrap.cgol_xlr_tor.host_regs_read_pulse[7:0]}]}
+	} ]]
+
+waveform xview limits 146556224.229ns 146556734.491ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Layout selection
+#
+
