@@ -1,5 +1,5 @@
 #include <k5_libs.h>
-#include <../cgol_shared_lib/bit_array.h>   // types and static inline functions
+#include <../cgol_shared_lib/bit_array.h>   // Types and static inline functions
 #include <../cgol_shared_lib/cgol_shared_lib.h> // Shared among multiple cgol app versions
 
 //---------------------------------------------------------------------------
