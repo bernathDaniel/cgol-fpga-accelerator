@@ -1,4 +1,4 @@
-### How to run a Simulation with K5 Environment
+# How to run a Simulation with K5 Environment
 
 ## Step 1: Open 2 Terminals
 At this step don't type "tsmc65" or anything, just open the terminal.
