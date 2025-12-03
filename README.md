@@ -112,10 +112,7 @@ Validated across 9 test patterns (16×64 to 64×64 grids) with 2M iterations eac
 
 ## About This Project
 
-This project was developed as part of an Intel/WeebitNano-sponsored hackathon, focusing on achieving maximum performance through systematic optimization of:
-- Clock cycle reduction (pipelining, state decoupling)
-- Timing closure (fanout reduction, explicit truncation, one-hot encoding)
-- Area-performance trade-offs (DFF allocation, signal grouping)
+This project was developed as part of an Intel/WeebitNano-sponsored hackathon, focusing on achieving maximum performance through systematic optimization for minimal clock cycles per row (pipelining, state decoupling) and fastest time per 2M iterations for various designs
 
 **Grade:** 100/100
 
