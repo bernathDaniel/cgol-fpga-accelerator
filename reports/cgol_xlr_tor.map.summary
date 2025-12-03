@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Fri Jul 18 22:09:25 2025
+Quartus Prime Version : 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+Revision Name : cgol_xlr_tor
+Top-level Entity Name : qsyn_dummy_xlr_wrap
+Family : MAX 10
+Total logic elements : 2,468
+    Total combinational functions : 2,224
+    Dedicated logic registers : 707
+Total registers : 707
+Total pins : 111
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0

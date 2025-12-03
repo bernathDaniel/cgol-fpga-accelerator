@@ -1,0 +1,18 @@
+Fitter Status : Successful - Fri Jul 18 22:09:46 2025
+Quartus Prime Version : 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
+Revision Name : cgol_xlr_tor
+Top-level Entity Name : qsyn_dummy_xlr_wrap
+Family : MAX 10
+Device : 10M50DAF484C7G
+Timing Models : Final
+Total logic elements : 2,323 / 49,760 ( 5 % )
+    Total combinational functions : 2,224 / 49,760 ( 4 % )
+    Dedicated logic registers : 707 / 49,760 ( 1 % )
+Total registers : 707
+Total pins : 111 / 360 ( 31 % )
+Total virtual pins : 0
+Total memory bits : 0 / 1,677,312 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 288 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )
