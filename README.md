@@ -22,7 +22,7 @@
 ## Key Features
 
 **Architecture:**
-- Pipelined FSM with READ-WRITE ping-pong mechanism
+- Pipelined FSM with interleaved READ-WRITE mechanism
 - Double-buffering for torus edge handling (eliminates modulo operations)
 - Two-stage tree adder: vertical column sums + horizontal neighbor aggregation
 - HW-SW handshake optimization (single done signal for N iterations)
