@@ -112,7 +112,10 @@ Validated across 9 test patterns (16×64 to 64×64 grids) with 2M iterations eac
 
 ## About This Project
 
-This project was developed as part of an Intel/WeebitNano-sponsored hackathon, focusing on achieving maximum performance through systematic optimization for minimal clock cycles per row (pipelining, state decoupling) and fastest time per 2M iterations for various designs
+Developed as part of Intel/WeebitNano-sponsored hackathon with competition 
+objectives of minimal clock cycles per row and fastest execution time for 2M 
+iterations. Extended beyond requirements to explore timing closure and FPGA 
+performance limits through STA-driven, synthesis-aware optimizations.
 
 **Grade:** 100/100
 
