@@ -8,11 +8,11 @@
 
 | Metric | Value |
 |--------|-------|
-| **Fmax** | 79.15 MHz |
+| **Fmax** | 78.88 MHz |
 | **Throughput** | 2.06 cycles/row |
 | **Grid Support** | Up to 64×64 (multiples of 8) |
 | **Topology** | Torus (wraparound boundaries) |
-| **Platform** | Intel Cyclone V FPGA |
+| **FPGA Platform** | Altera MAX10 (DE10-Lite) |
 
 **Benchmark:** 2M iterations on 64×64 grid completed in **5.28 seconds** (validated on hardware)
 
