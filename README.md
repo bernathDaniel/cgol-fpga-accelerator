@@ -40,7 +40,7 @@
 ### Pipelined FSM
 Achieved 2-cycle-per-row throughput through:
 - Interleaved memory read/write operations
-- Strategic state decoupling to minimize critical paths
+- STA-guided strategic state decoupling to minimize critical paths
 - Fake initial write for pipeline timing alignment
 
 ### Torus Topology
