@@ -1,2 +1,156 @@
-# cgol-fpga-accelerator
-Hardware-accelerated Conway's Game of Life on FPGA with optimized pipelined FSM and torus topology support
+# Hardware-Accelerated Conway's Game of Life on FPGA
+
+**High-performance FPGA implementation achieving 2.06 cycles/row at 79 MHz with optimized pipelined FSM and torus topology support.**
+
+---
+
+## Performance Results
+
+| Metric | Value |
+|--------|-------|
+| **Fmax** | 79.15 MHz |
+| **Throughput** | 2.06 cycles/row |
+| **Grid Support** | Up to 64×64 (multiples of 8) |
+| **Topology** | Torus (wraparound boundaries) |
+| **Platform** | Intel Cyclone V FPGA |
+
+**Benchmark:** 2M iterations on 64×64 grid completed in **5.28 seconds** (validated on hardware)
+
+---
+
+## Key Features
+
+**Architecture:**
+- Pipelined FSM with READ-WRITE ping-pong mechanism
+- Double-buffering for torus edge handling (eliminates modulo operations)
+- Two-stage tree adder: vertical column sums + horizontal neighbor aggregation
+- HW-SW handshake optimization (single done signal for N iterations)
+
+**Optimizations:**
+- One-hot state encoding with bit-masking for critical path reduction
+- Modified CGOL rules (9-neighbor evaluation) eliminates subtractor
+- Explicit signal truncation and fanout reduction for timing closure
+- Synthesis-aware design: reformulated logic for single-LUT evaluation
+
+---
+
+## Repository Structure
+
+```
+├── src/
+│   ├── cgol_xlr_tor.sv          # Final optimized design (79 MHz)
+│   └── cgol_xlr_tor_75_clean.sv # Earlier iteration (75 MHz)
+├── docs/
+│   └── CGOL_Torus_Documentation.pdf  # Comprehensive 28-page design document
+├── reports/
+│   ├── README.md                # Synthesis analysis and timing breakdown
+│   ├── cgol_xlr_tor.sta.rpt     # Full timing analysis
+│   ├── cgol_xlr_tor.fit.summary # Resource utilization
+│   └── cgol_xlr_tor.map.summary # Technology mapping results
+└── scripts/
+    └── run_xcelium.sh           # Simulation script with waveform generation
+```
+
+---
+
+## Design Highlights
+
+### Pipelined FSM
+Achieved 2-cycle-per-row throughput through:
+- Interleaved memory read/write operations
+- Strategic state decoupling to minimize critical paths
+- Fake initial write for pipeline timing alignment
+
+### Torus Topology
+Efficient wraparound handling via:
+- Double-buffer storing first two rows (row[0], row[1])
+- Write sequence: 1, 2, ..., N-1, 0 (overwrites fake initial write)
+- Eliminates expensive modulo operations
+
+### Bit-Masking Optimization
+Critical path reduction using 20-bit lookup mask:
+```systemverilog
+localparam M_CGOL = 20'b0000_0000_0010_1100_0000;
+updated_row[i] = M_CGOL[{sum_neighs, i_cell}];
+```
+Replaces comparators and conditional logic with single-LUT evaluation.
+
+---
+
+## Technical Stack
+
+- **HDL:** SystemVerilog
+- **Simulation:** Cadence Xcelium + SimVision
+- **Synthesis:** Intel Quartus Prime
+- **Target:** Intel Cyclone V (5CEBA4F23C7)
+- **Resources:** 2,468 LEs, 707 registers, 5 M10Ks
+
+---
+
+## Design Evolution
+
+This repository represents the culmination of iterative optimization:
+
+**Early Design (75 MHz):**
+- 4.2 cycles/row
+- Basic pipelined FSM
+- No HW-SW handshake optimization
+
+**Final Design (79 MHz):**
+- 2.06 cycles/row  
+- Full HW-SW handshake (single done signal for N iterations)
+- Aggressive timing closure optimizations
+- ~60 DFF, ~100 LE cost for handshake optimization
+
+Trade-off: Small area increase for 2× throughput improvement.
+
+---
+
+## Documentation
+
+For comprehensive design details, see [`docs/CGOL_Torus_Documentation.pdf`](docs/CGOL_Torus_Documentation.pdf), which covers:
+- Complete architectural walkthrough
+- State machine design and timing analysis
+- Optimization techniques and trade-offs
+- Full verification results across all test patterns
+- Synthesis reports and timing closure methodology
+
+For synthesis analysis and timing breakdown, see [`reports/README.md`](reports/README.md).
+
+---
+
+## Verification
+
+Validated across 9 test patterns (16×64 to 64×64 grids) with 2M iterations each:
+- Functional correctness verified in simulation (Xcelium)
+- Hardware validation on FPGA with 7-segment display timing measurement
+- All patterns achieve 2.06-2.25 cycles/row (varies by grid dimensions)
+
+---
+
+## About This Project
+
+This project was developed as part of an Intel/WebitNano-sponsored hackathon, focusing on achieving maximum performance through systematic optimization of:
+- Clock cycle reduction (pipelining, state decoupling)
+- Timing closure (fanout reduction, explicit truncation, one-hot encoding)
+- Area-performance trade-offs (DFF allocation, signal grouping)
+
+**Grade:** 100/100
+
+**Design Philosophy:** Exhaustive exploration of synthesis behavior through iterative testing—not just validating correctness, but building deep hardware intuition.
+
+---
+
+## License
+
+MIT License
+
+---
+
+## Author
+
+**Daniel Bernath**  
+B.Sc. Electrical Engineering (Nanoelectronics & Signal Processing)  
+Bar-Ilan University, 2025
+
+[LinkedIn](https://linkedin.com/in/bernathdaniel) | [GitHub](https://github.com/bernathDaniel)
