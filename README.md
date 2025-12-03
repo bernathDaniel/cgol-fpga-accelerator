@@ -10,7 +10,7 @@
 |--------|-------|
 | **Fmax (Design)** | 78.88 MHz |
 | Clock Frequency | 50 MHz (FPGA system limit) |
-| **Throughput** | 2.06 cycles/row |
+| **Throughput** | 24.27 M rows/second (at 50 MHz) |
 | **Grid Support** | Up to 64×64 (multiples of 8) |
 | **Topology** | Torus (wraparound boundaries) |
 | **FPGA Platform** | Altera MAX10 (DE10-Lite) |
