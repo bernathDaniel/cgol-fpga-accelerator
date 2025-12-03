@@ -35,25 +35,6 @@
 
 ---
 
-## Repository Structure
-
-```
-├── src/
-│   ├── cgol_xlr_tor.sv          # Final optimized design (79 MHz)
-│   └── cgol_xlr_tor_75_clean.sv # Earlier iteration (75 MHz)
-├── docs/
-│   └── CGOL_Torus_Documentation.pdf  # Comprehensive 28-page design document
-├── reports/
-│   ├── README.md                # Synthesis analysis and timing breakdown
-│   ├── cgol_xlr_tor.sta.rpt     # Full timing analysis
-│   ├── cgol_xlr_tor.fit.summary # Resource utilization
-│   └── cgol_xlr_tor.map.summary # Technology mapping results
-└── scripts/
-    └── run_xcelium.sh           # Simulation script with waveform generation
-```
-
----
-
 ## Design Highlights
 
 ### Pipelined FSM
