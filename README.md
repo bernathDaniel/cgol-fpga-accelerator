@@ -141,12 +141,6 @@ This project was developed as part of an Intel/WebitNano-sponsored hackathon, fo
 
 ---
 
-## License
-
-MIT License
-
----
-
 ## Author
 
 **Daniel Bernath**  
