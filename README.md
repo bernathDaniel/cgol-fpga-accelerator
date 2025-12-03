@@ -119,8 +119,6 @@ performance limits through STA-driven, synthesis-aware optimizations.
 
 **Grade:** 100/100
 
-**Design Philosophy:** Exhaustive exploration of synthesis behavior through iterative testing—not just validating correctness, but building deep hardware intuition.
-
 ---
 
 ## Author
