@@ -62,9 +62,9 @@ Replaces comparators and conditional logic with single-LUT evaluation.
 ## Technical Stack
 
 - **HDL:** SystemVerilog
+- **Programming:** C
 - **Simulation:** Cadence Xcelium + SimVision
 - **Synthesis:** Intel Quartus Prime
-- **Target:** Intel Cyclone V (5CEBA4F23C7)
 - **Resources:** 2,468 LEs, 707 registers, 5 M10Ks
 
 ---
@@ -81,7 +81,7 @@ This repository represents the culmination of iterative optimization:
 **Final Design (79 MHz):**
 - 2.06 cycles/row  
 - Full HW-SW handshake (single done signal for N iterations)
-- Aggressive timing closure optimizations
+- Aggressive STA-driven & Synthesis-aware timing closure optimizations
 - ~60 DFF, ~100 LE cost for handshake optimization
 
 Trade-off: Small area increase for 2× throughput improvement.
