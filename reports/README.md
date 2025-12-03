@@ -189,4 +189,4 @@ All synthesis results validated through:
 
 For complete architectural details and design rationale, see:
 - Main project documentation: [`docs/CGOL_Torus_Documentation.pdf`](../docs/CGOL_Torus_Documentation.pdf)
-- Source code: [`src/cgol_xlr_tor.sv`](../src/cgol_xlr_tor.sv)
+- Source code: [`src/rtl/cgol_xlr_tor.sv`](../src/rtl/cgol_xlr_tor.sv)
