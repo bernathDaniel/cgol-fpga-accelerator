@@ -65,7 +65,7 @@ Replaces comparators and conditional logic with single-LUT evaluation.
 - **Programming:** C
 - **Simulation:** Cadence Xcelium + SimVision
 - **Synthesis:** Intel Quartus Prime
-- **Resources:** 2,468 LEs, 707 registers, 5 M10Ks
+- **Resources:** 2,323 LEs (5%), 707 registers (1%)
 
 ---
 
