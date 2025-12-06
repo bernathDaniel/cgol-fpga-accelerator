@@ -29,9 +29,9 @@
 
 - **Two-stage tree adder processing:** Stage 1 computes vertical column sums (3 cells per column), Stage 2 reuses these sums for horizontal neighbor aggregation. Reduces critical path depth vs. flat summation.
 
-### Performance Optimizations
-
 - **20-bit CGOL lookup mask:** Single-LUT cell evaluation via `M_CGOL[{sum_neighs, i_cell}]` eliminates comparators and subtractor. Modified 9-neighbor rule (includes current cell) avoids subtraction operation.
+
+### Performance Optimizations
 
 - **Strategic state decoupling:** Created dedicated DBL_LOAD and LST_LOAD states to separate initial loading phase from steady-state pipeline operation, offloading logic from bottleneck READ state. Initially zero-cost within 3-bit binary encoding headroom (up to 8 states available), achieved 4 MHz improvement by distributing combinational and sequential logic across multiple states.
 
