@@ -41,13 +41,15 @@
 
 - **Truncated comparisons:** Exploited known grid dimensions (16/32/48/64) for 3-bit MSB comparison instead of full 7-bit equality checks.
 
-- **HW-SW handshake optimization:** Single done signal for N iterations eliminates per-iteration overhead (~16M cycle savings across 2M iterations).
+- **HW-SW handshake optimization:** Single done signal for N iterations eliminates per-iteration overhead (~16M cycle savings across 2M iterations). Final trade-off: sacrificed 2 MHz Fmax (81.54 → 79 MHz) for 2× throughput improvement.
 
 ### Optimization Methodology
 
 - **Iterative STA-driven refinement:** Continuous analysis of synthesis reports (STA, MAP & FIT) guided design evolution from 62 MHz → 81.54 MHz peak performance.
 
 - **Signal consolidation via mutual-exclusivity analysis:** Restructured sequential logic by grouping signals based on activation conditions rather than functional boundaries. Result: 7 MHz improvement through reduced MUX width & depth and control signal fanout.
+
+- **Quantified trade-offs:** All major design decisions evaluated with measured impact (e.g., "4 DFF for 4 MHz," "128 DFF for 4M cycles," "2 MHz Fmax for 2× throughput"). Documented trade-off analysis guided optimization priorities throughout development.
 
 - **Quantified trade-offs:** Final design trades 2 MHz Fmax (81.54 → 79 MHz) for 2× throughput improvement via HW-SW handshake optimization. All major decisions measured and documented.
 
