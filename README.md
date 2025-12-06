@@ -35,8 +35,6 @@
 
 - **Strategic state decoupling:** Created dedicated DBL_LOAD and LST_LOAD states to separate initial loading phase from steady-state pipeline operation, offloading logic from bottleneck READ state. Initially zero-cost within 3-bit binary encoding headroom (up to 8 states available), achieved 4 MHz improvement by distributing combinational and sequential logic across multiple states.
 
-- **Strategic state decoupling:** Created dedicated DBL_LOAD and LST_LOAD states to offload complex indexing and buffer management from critical READ state. Initially zero-cost within 3-bit binary encoding headroom, achieved 4 MHz improvement by isolating bottleneck logic.
-
 - **One-hot state encoding with bit-masking:** Direct state checking (`if (state[READ_IDX])`) replaces equality comparisons, reducing MUX depth. Additional 1-2 MHz gain at cost of 4 DFF when transitioning from binary encoding.
 
 - **Critical path decoupling:** Dedicated staging signals (e.g., `dbl_load_idx`) break high-fanout paths. Explicit index assignments in LOAD states eliminate dynamic indexing overhead from READ state.
