@@ -47,7 +47,7 @@
 
 - **Iterative STA-driven refinement:** Continuous analysis of synthesis reports (STA, MAP & FIT) guided design evolution from 62 MHz → 81.54 MHz peak performance.
 
-- **Signal consolidation via mutual-exclusivity analysis:** Restructured sequential logic by grouping signals based on activation conditions rather than functional boundaries. Result: 7 MHz improvement through reduced MUX depth and control signal fanout.
+- **Signal consolidation via mutual-exclusivity analysis:** Restructured sequential logic by grouping signals based on activation conditions rather than functional boundaries. Result: 7 MHz improvement through reduced MUX width & depth and control signal fanout.
 
 - **Quantified trade-offs:** Final design trades 2 MHz Fmax (81.54 → 79 MHz) for 2× throughput improvement via HW-SW handshake optimization. All major decisions measured and documented.
 
