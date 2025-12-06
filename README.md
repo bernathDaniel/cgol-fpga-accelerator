@@ -51,8 +51,6 @@
 
 - **Quantified trade-offs:** All major design decisions evaluated with measured impact (e.g., "4 DFF for 4 MHz," "128 DFF for 4M cycles," "2 MHz Fmax for 2× throughput"). Documented trade-off analysis guided optimization priorities throughout development.
 
-- **Quantified trade-offs:** Final design trades 2 MHz Fmax (81.54 → 79 MHz) for 2× throughput improvement via HW-SW handshake optimization. All major decisions measured and documented.
-
 ---
 
 ## Technical Stack
