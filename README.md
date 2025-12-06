@@ -33,6 +33,8 @@
 
 - **20-bit CGOL lookup mask:** Single-LUT cell evaluation via `M_CGOL[{sum_neighs, i_cell}]` eliminates comparators and subtractor. Modified 9-neighbor rule (includes current cell) avoids subtraction operation.
 
+- **Strategic state decoupling:** Created dedicated DBL_LOAD and LST_LOAD states to separate initial loading phase from steady-state pipeline operation, offloading logic from bottleneck READ state. Initially zero-cost within 3-bit binary encoding headroom (up to 8 states available), achieved 4 MHz improvement by distributing combinational and sequential logic across multiple states.
+
 - **Strategic state decoupling:** Created dedicated DBL_LOAD and LST_LOAD states to offload complex indexing and buffer management from critical READ state. Initially zero-cost within 3-bit binary encoding headroom, achieved 4 MHz improvement by isolating bottleneck logic.
 
 - **One-hot state encoding with bit-masking:** Direct state checking (`if (state[READ_IDX])`) replaces equality comparisons, reducing MUX depth. Additional 1-2 MHz gain at cost of 4 DFF when transitioning from binary encoding.
