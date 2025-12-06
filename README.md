@@ -74,8 +74,6 @@ For comprehensive design details, see [`docs/CGOL_Torus_Documentation.pdf`](docs
 - Full verification results across all test patterns
 - Synthesis reports and timing closure methodology
 
-For synthesis analysis and timing breakdown, see [`reports/README.md`](reports/README.md).
-
 ---
 
 ## Verification
