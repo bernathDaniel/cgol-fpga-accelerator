@@ -47,6 +47,8 @@
 
 - **Iterative STA-driven refinement:** Continuous analysis of synthesis reports (STA, MAP & FIT) guided design evolution from 62 MHz → 81.54 MHz peak performance.
 
+- **Checkpoint-based development:** Maintained version control through ~20 design checkpoints, enabling safe experimentation and rollback of unsuccessful optimizations. Systematic iteration from initial working design through peak performance exploration.
+
 - **Signal consolidation via mutual-exclusivity analysis:** Restructured sequential logic by grouping signals based on activation conditions rather than functional boundaries. Result: 7 MHz improvement through reduced MUX width & depth and control signal fanout.
 
 - **Quantified trade-offs:** All major design decisions evaluated with measured impact (e.g., "4 DFF for 4 MHz," "128 DFF for 4M cycles," "2 MHz Fmax for 2× throughput"). Documented trade-off analysis guided optimization priorities throughout development.
