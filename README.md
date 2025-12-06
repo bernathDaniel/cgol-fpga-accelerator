@@ -53,22 +53,6 @@
 
 ---
 
-## Key Features
-
-**Architecture:**
-- Pipelined FSM with interleaved READ-WRITE mechanism
-- Double-buffering for torus edge handling (eliminates modulo operations)
-- Two-stage tree adder: vertical column sums + horizontal neighbor aggregation
-- HW-SW handshake optimization (single done signal for N iterations)
-
-**Optimizations:**
-- One-hot state encoding with bit-masking for critical path reduction
-- Modified CGOL rules (9-neighbor evaluation) eliminates subtractor
-- Explicit signal truncation and fanout reduction for timing closure
-- Synthesis-aware design: reformulated logic for single-LUT evaluation
-
----
-
 ## Design Highlights
 
 ### Pipelined FSM
