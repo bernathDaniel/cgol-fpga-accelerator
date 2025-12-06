@@ -45,7 +45,7 @@
 
 ### Optimization Methodology
 
-- **Iterative STA-driven refinement:** Continuous analysis of synthesis reports (STA for timing, MAP for estimates, FIT for actual usage) guided design evolution from 62 MHz → 81.54 MHz peak performance.
+- **Iterative STA-driven refinement:** Continuous analysis of synthesis reports (STA, MAP & FIT) guided design evolution from 62 MHz → 81.54 MHz peak performance.
 
 - **Signal consolidation via mutual-exclusivity analysis:** Restructured sequential logic by grouping signals based on activation conditions rather than functional boundaries. Result: 7 MHz improvement through reduced MUX depth and control signal fanout.
 
