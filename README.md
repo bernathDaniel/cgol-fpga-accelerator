@@ -19,6 +19,44 @@
 
 ---
 
+```markdown
+## Technical Overview
+
+### Architecture
+
+- **Pipelined FSM with interleaved read-write operations:** Achieves 2.06 cycles/row through simultaneous memory access - reading next row while writing previous row. Strategic state decoupling (DBL_LOAD, LST_LOAD states) isolates complex indexing logic from critical READ state.
+
+- **Double-buffering for torus boundary handling:** Stores first two rows (row[0], row[1]) enabling natural write sequence 1,2,...,N-1,0 without modulo operations. Trade-off: 128 DFF cost for 4M cycle savings.
+
+- **Two-stage tree adder processing:** Stage 1 computes vertical column sums (3 cells per column), Stage 2 reuses these sums for horizontal neighbor aggregation. Reduces critical path depth vs. flat summation.
+
+### Performance Optimizations
+
+- **20-bit CGOL lookup mask:** Single-LUT cell evaluation via `M_CGOL[{sum_neighs, i_cell}]` eliminates comparators and subtractor. Modified 9-neighbor rule (includes current cell) avoids subtraction operation.
+
+- **Strategic state decoupling:** Created dedicated DBL_LOAD and LST_LOAD states to offload complex indexing and buffer management from critical READ state. Initially zero-cost within 3-bit binary encoding headroom, achieved 4 MHz improvement by isolating bottleneck logic.
+
+- **One-hot state encoding with bit-masking:** Direct state checking (`if (state[READ_IDX])`) replaces equality comparisons, reducing MUX depth. Additional 1-2 MHz gain at cost of 4 DFF when transitioning from binary encoding.
+
+- **Critical path decoupling:** Dedicated staging signals (e.g., `dbl_load_idx`) break high-fanout paths. Explicit index assignments in LOAD states eliminate dynamic indexing overhead from READ state.
+
+- **Truncated comparisons:** Leverages known grid dimensions (16/32/48/64) for 3-bit MSB comparison instead of full 7-bit equality checks.
+
+- **HW-SW handshake optimization:** Single done signal for N iterations eliminates per-iteration overhead (~16M cycle savings across 2M iterations).
+
+### Optimization Methodology
+
+- **Iterative STA-driven refinement:** Continuous analysis of synthesis reports (STA for timing, MAP for estimates, FIT for actual usage) guided design evolution from 62 MHz → 81.54 MHz peak performance.
+
+- **Signal consolidation via mutual-exclusivity analysis:** Restructured sequential logic by grouping signals based on activation conditions rather than functional boundaries. Result: 7 MHz improvement through reduced MUX depth and control signal fanout.
+
+- **Quantified trade-offs:** Final design trades 2 MHz Fmax (81.54 → 79 MHz) for 2× throughput improvement via HW-SW handshake optimization. All major decisions measured and documented.
+```
+
+Copy-paste ready! 🔥
+
+---
+
 ## Key Features
 
 **Architecture:**
