@@ -23,6 +23,10 @@
 
 ### Architecture
 
+- **Pipelined FSM with interleaved read-write operations:** Achieves 2 cycles/row steady-state throughput through READ-WRITE-READ-WRITE ping-pong mechanism with single-port SRAM. Overall 2.06 cycles/row accounts for initial 3-row loading overhead and done state. Fake initial write aligns pipeline timing for seamless interleaved operation.
+
+- **Pipelined FSM with interleaved read-write operations:** Achieves 2 cycles/row steady-state throughput via READ-WRITE ping-pong mechanism (single-port SRAM constraint). Fake initial write enables seamless pipeline operation. Overall 2.06 cycles/row includes initial 3-row loading and completion overhead.
+
 - **Pipelined FSM with interleaved read-write operations:** Achieves 2.06 cycles/row through simultaneous memory access - reading next row while writing previous row. Strategic state decoupling (DBL_LOAD, LST_LOAD states) isolates complex indexing logic from critical READ state.
 
 - **Double-buffering for torus boundary handling:** Stores first two rows (row[0], row[1]) enabling natural write sequence 1,2,...,N-1,0 without modulo operations. Trade-off: 128 DFF cost for 4M cycle savings.
