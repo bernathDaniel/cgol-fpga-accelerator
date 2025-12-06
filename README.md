@@ -53,30 +53,6 @@
 
 ---
 
-## Design Highlights
-
-### Pipelined FSM
-Achieved 2-cycle-per-row throughput through:
-- Interleaved memory read/write operations
-- STA-guided strategic state decoupling to minimize critical paths
-- Fake initial write for pipeline timing alignment
-
-### Torus Topology
-Efficient wraparound handling via:
-- Double-buffer storing first two rows (row[0], row[1])
-- Write sequence: 1, 2, ..., N-1, 0 (overwrites fake initial write)
-- Eliminates expensive modulo operations
-
-### Bit-Masking Optimization
-Critical path reduction using 20-bit lookup mask:
-```systemverilog
-localparam M_CGOL = 20'b0000_0000_0010_1100_0000;
-updated_row[i] = M_CGOL[{sum_neighs, i_cell}];
-```
-Replaces comparators and conditional logic with single-LUT evaluation.
-
----
-
 ## Technical Stack
 
 - **HDL:** SystemVerilog
@@ -84,25 +60,6 @@ Replaces comparators and conditional logic with single-LUT evaluation.
 - **Simulation:** Cadence Xcelium + SimVision
 - **Synthesis:** Intel Quartus Prime
 - **Resources:** 2,323 LEs (5%), 707 registers (1%)
-
----
-
-## Design Evolution
-
-This repository represents the culmination of iterative optimization:
-
-**Early Design (75 MHz):**
-- 4.2 cycles/row
-- Basic pipelined FSM
-- No HW-SW handshake optimization
-
-**Final Design (79 MHz):**
-- 2.06 cycles/row  
-- Full HW-SW handshake (single done signal for N iterations)
-- Aggressive STA-driven & Synthesis-aware timing closure optimizations
-- ~60 DFF, ~100 LE cost for handshake optimization
-
-Trade-off: Small area increase for 2× throughput improvement.
 
 ---
 
