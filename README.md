@@ -74,6 +74,8 @@ For comprehensive design details, see [`docs/CGOL_Torus_Documentation.pdf`](docs
 - Full verification results across all test patterns
 - Synthesis reports and timing closure methodology
 
+Synthesis reports (STA, MAP, FIT) available in [`reports/`](reports/) directory.
+
 ---
 
 ## Verification
