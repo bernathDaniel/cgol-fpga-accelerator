@@ -39,8 +39,6 @@
 
 - **Fanout reduction via explicit indexing in LOAD states:** Triple buffer index signals (`triple_buf_*_idx`) drive massive fanout (192+ DFFs across buffers + processing logic). During deterministic loading phase, replaced dynamic indexing with dedicated signals (`dbl_load_idx` toggle, hardcoded `[2]` in LST_LOAD) to reduce fanout on high-utilization nets during critical operations.
 
-- **Critical path decoupling:** Dedicated staging signals (e.g., `dbl_load_idx`) break high-fanout paths. Explicit index assignments in LOAD states eliminate dynamic indexing overhead from READ state.
-
 - **Truncated comparisons:** Leverages known grid dimensions (16/32/48/64) for 3-bit MSB comparison instead of full 7-bit equality checks.
 
 - **HW-SW handshake optimization:** Single done signal for N iterations eliminates per-iteration overhead (~16M cycle savings across 2M iterations).
