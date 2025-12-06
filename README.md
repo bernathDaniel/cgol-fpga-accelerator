@@ -37,6 +37,8 @@
 
 - **One-hot state encoding with bit-masking:** Direct state checking (`if (state[READ_IDX])`) replaces equality comparisons, reducing MUX depth. Additional 1-2 MHz gain at cost of 4 DFF when transitioning from binary encoding.
 
+- **Fanout reduction via explicit indexing in LOAD states:** Triple buffer index signals (`triple_buf_*_idx`) drive massive fanout (192+ DFFs across buffers + processing logic). During deterministic loading phase, replaced dynamic indexing with dedicated signals (`dbl_load_idx` toggle, hardcoded `[2]` in LST_LOAD) to reduce fanout on high-utilization nets during critical operations.
+
 - **Critical path decoupling:** Dedicated staging signals (e.g., `dbl_load_idx`) break high-fanout paths. Explicit index assignments in LOAD states eliminate dynamic indexing overhead from READ state.
 
 - **Truncated comparisons:** Leverages known grid dimensions (16/32/48/64) for 3-bit MSB comparison instead of full 7-bit equality checks.
