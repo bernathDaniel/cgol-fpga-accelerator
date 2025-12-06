@@ -19,7 +19,6 @@
 
 ---
 
-```markdown
 ## Technical Overview
 
 ### Architecture
@@ -51,9 +50,6 @@
 - **Signal consolidation via mutual-exclusivity analysis:** Restructured sequential logic by grouping signals based on activation conditions rather than functional boundaries. Result: 7 MHz improvement through reduced MUX depth and control signal fanout.
 
 - **Quantified trade-offs:** Final design trades 2 MHz Fmax (81.54 → 79 MHz) for 2× throughput improvement via HW-SW handshake optimization. All major decisions measured and documented.
-```
-
-Copy-paste ready! 🔥
 
 ---
 
