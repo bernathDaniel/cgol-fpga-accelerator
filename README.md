@@ -35,6 +35,8 @@
 
 - **Strategic state decoupling:** Created dedicated DBL_LOAD and LST_LOAD states to separate initial loading phase from steady-state pipeline operation, offloading logic from bottleneck READ state. Initially zero-cost within 3-bit binary encoding headroom (up to 8 states available), achieved 4 MHz improvement by distributing combinational and sequential logic across multiple states.
 
+- **One-hot state encoding with bit-masking:** Bit-masking state checks (`if (state[READ_IDX])`) eliminate decode logic - each state bit directly serves as MUX selector vs. requiring 3-bit comparison in binary encoding. Reduces combinational depth in next-state logic. Additional 1-2 MHz gain at cost of 4 DFF when transitioning from binary encoding.
+
 - **One-hot state encoding with bit-masking:** Direct state checking (`if (state[READ_IDX])`) replaces equality comparisons, reducing MUX depth. Additional 1-2 MHz gain at cost of 4 DFF when transitioning from binary encoding.
 
 - **Fanout reduction via explicit indexing in LOAD states:** Triple buffer index signals (`triple_buf_*_idx`) drive massive fanout (192+ DFFs across buffers + processing logic). During deterministic loading phase, replaced dynamic indexing with dedicated signals (`dbl_load_idx` toggle, hardcoded `[2]` in LST_LOAD) to reduce fanout on high-utilization nets during critical operations.
