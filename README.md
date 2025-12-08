@@ -21,7 +21,7 @@
 
 ## Technical Overview
 
-### Architecture
+### Architecture Highlights
 
 - **Pipelined FSM with interleaved read-write operations:** Achieves 2 cycles/row steady-state throughput through READ-WRITE ping-pong mechanism with single-port SRAM. Overall 2.06 cycles/row accounts for initial 3-row loading overhead and done state. Fake initial write aligns pipeline timing for seamless interleaved operation.
 
