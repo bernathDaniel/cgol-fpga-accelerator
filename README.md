@@ -60,6 +60,7 @@
 - **HDL:** SystemVerilog
 - **Programming:** C
 - **Simulation:** Cadence Xcelium + SimVision
+- **Development:** Git, Unix/Linux, Shell Scripting
 - **Synthesis:** Intel Quartus Prime
 - **Resources:** 2,323 LEs (5%), 707 registers (1%)
 
